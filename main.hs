@@ -22,7 +22,8 @@ class Scrabble l where
   point :: l -> Integer
 
 instance Scrabble Letter where
-  point l = (*) (fst $ head $ Map.toList $ Map.filter (== True) $ Map.mapWithKey (\_ v -> elem (lSigne l) v) initData) (bonnus2int (lBonnus l))
+  point l = (*) (fst $ head $ Map.toList $ Map.filter (== True) $
+                 Map.mapWithKey (\_ v -> elem (lSigne l) v) initData) (bonnus2int (lBonnus l))
 
 instance Scrabble Word where
   point w = (*) (foldr (+) 0 $ map point $ wSignes w) (bonnus2int (wBonnus w))
@@ -52,5 +53,8 @@ main = do
   putStr $ "Word bonus's word (" ++ w ++ ") : "
   bonnusw <- getLine
   putStrLn $ "Point : " 
-  letters <- (mapM (\l-> (putStr $ "Bonnus " ++ show l ++ " ? ") >> (getLine) >>= (\c-> return $  Letter l (char2bonnus (head c)))) w)
-  putStrLn $ "Resultat pour " ++ w ++ " " ++ (show $ point $ Word letters (char2bonnus (head bonnusw)))
+  letters <- (mapM (\l-> (putStr $ "Bonnus " ++ show l ++ " ? ") >>
+                         (getLine) >>=
+                         (\c-> return $  Letter l (char2bonnus (head c)))) w)
+  putStrLn $ "Resultat pour " ++ w
+    ++ " " ++ (show $ point $ Word letters (char2bonnus (head bonnusw)))
