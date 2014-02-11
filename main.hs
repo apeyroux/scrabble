@@ -1,5 +1,5 @@
 {-
-sample in haskell
+haskell school
 scrabble calculator
 -}
 
@@ -50,11 +50,10 @@ main :: IO()
 main = do
   putStr "Word : "
   w <- getLine
-  putStr $ "Word bonus's word (" ++ w ++ ") : "
+  putStr $ "Word bonus's for " ++ w ++ " (d/t/n) : "
   bonnusw <- getLine
-  putStrLn $ "Point : " 
-  letters <- (mapM (\l-> (putStr $ "Bonnus " ++ show l ++ " ? ") >>
+  letters <- (mapM (\l-> (putStr $ "Bonnus " ++ show l ++ " (d/t/n) ? ") >>
                          (getLine) >>=
                          (\c-> return $  Letter l (char2bonnus (head c)))) w)
-  putStrLn $ "Resultat pour " ++ w
+  putStrLn $ "Result for " ++ w
     ++ " " ++ (show $ point $ Word letters (char2bonnus (head bonnusw)))
