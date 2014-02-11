@@ -56,10 +56,9 @@ initData = Map.singleton 1 ['e','a','i','n','o','r','s','t','u','l'] <>
 main :: IO()
 main = do
   putStr "Word : "
-  m <- getLine
-  putStr $ "Word bonus's word (" ++ m ++ ") : "
-  bm <- getLine
+  w <- getLine
+  putStr $ "Word bonus's word (" ++ w ++ ") : "
+  bonnusw <- getLine
   putStrLn $ "Point : " 
-  ls <- (mapM (\l-> (putStr $ "Bonnus " ++ show l ++ " ? ") >> (getLine) >>= (\c-> return $  Letter l (char2bonnus (head c)))) m)
-  let wds = Word ls (char2bonnus (head bm))
-  putStrLn $ "Resultat pour " ++ m ++ " " ++ (show $ point wds)
+  letters <- (mapM (\l-> (putStr $ "Bonnus " ++ show l ++ " ? ") >> (getLine) >>= (\c-> return $  Letter l (char2bonnus (head c)))) w)
+  putStrLn $ "Resultat pour " ++ w ++ " " ++ (show $ point $ Word letters (char2bonnus (head bonnusw)))
